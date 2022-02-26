@@ -1,0 +1,117 @@
+import string
+from tokenize import String
+
+def Encriptacion(password, clave):
+
+    Encriptado = ""
+
+    for c in password:
+
+        if c.isupper(): 
+
+            c_index = ord(c) - ord('A')
+
+            c_cambiada = (c_index + clave) % 26 + ord('A')
+
+            c_new = chr(c_cambiada)
+
+            Encriptado += c_new
+
+        elif c.islower(): 
+
+            c_index = ord(c) - ord('a') 
+
+            c_cambiada = (c_index + clave) % 26 + ord('a')
+
+            c_new = chr(c_cambiada)
+
+            Encriptado += c_new
+
+        elif c.isdigit():
+
+            c_new = (int(c) + clave) % 10
+
+            Encriptado += str(c_new)
+
+        else:
+
+            Encriptado += c
+    
+    print("Tu contraseña Encriptada: ",Encriptado)
+
+    return Encriptado
+
+def Desencriptar(encryp_password, clave):
+
+    Desencriptado = ""
+
+    for c in encryp_password:
+
+        if c.isupper(): 
+
+            c_index = ord(c) - ord('A')
+
+            c_og_pos = (c_index - clave) % 26 + ord('A')
+
+            c_og = chr(c_og_pos)
+
+            Desencriptado += c_og
+
+        elif c.islower(): 
+
+            c_index = ord(c) - ord('a') 
+
+            c_og_pos = (c_index - clave) % 26 + ord('a')
+
+            c_og = chr(c_og_pos)
+
+            Desencriptado += c_og
+
+        elif c.isdigit():
+
+            c_og = (int(c) - clave) % 10
+
+            Desencriptado += str(c_og)
+
+        else:
+
+            Desencriptado += c
+
+    print("Tu contraseña original era: ",Desencriptado)
+
+    return Desencriptado
+
+def opcionclave():
+    numero = input("elige un numero del 1 al 26\n>")
+    int(numero)
+    return numero
+
+def opcioncontraseña():
+    contraseña = input()
+    contraseña = list(contraseña)
+    return contraseña
+
+def STR_TO_LIST():
+    encrypted_password = list(encrypted_password)
+    return
+
+def menu():
+	print ("Selecciona una opción")
+	print ("\t1 - Encriptar")
+	print ("\t2 - Desencriptar")
+	print ("\t9 - salir")
+ 
+while True:
+	menu()
+ 
+	opcionMenu = input("Escoje una opcion/inserta un numero\n>")
+ 
+	if opcionMenu=="1": 
+		print("Elegiste Encriptar...\n Escribe tu contraseña: "), Encriptacion(opcioncontraseña(), 4)
+	elif opcionMenu=="2":
+		print("Elegiste Desencriptar...\n Escribe tu contraseña Encriptada:"), Desencriptar(opcioncontraseña(), 4)
+	elif opcionMenu=="9":
+		break
+	else:
+		print ("")
+		input("No has pulsado ninguna opción correcta...\npulsa una tecla para continuar")
